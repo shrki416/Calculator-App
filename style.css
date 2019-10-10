@@ -4,5 +4,7 @@
 }
 
 body {
-    background-color: #4b4b4b;
+    background: #f2709c;
+    background: -webkit-linear-gradient(to right, #ff9472, #f2709c);
+    background: linear-gradient(to right, #ff9472, #f2709c);
 }
