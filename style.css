@@ -30,14 +30,14 @@ body {
 }
 
 .calculator > button:hover {
-    background-color: rgba(255, 255, 255, .9);
+    background-color: rgba(250, 128, 114);
 }
 
 .two {
     grid-column: span 2;
 }
 
-.calculatorScreen {
+.calculatorDisplay {
     grid-column: 1 / -1;
     background-color: rgba(0, 0, 0, .75);
     display: flex;
@@ -49,12 +49,12 @@ body {
     word-break: break-all;
 }
 
-.calculatorScreen .previous-screen {
+.calculatorDisplay .previous-display {
     color: rgba(255, 255, 255, .75);
     font-size: 1rem;
 }
 
-.calculatorScreen .current-screen {
+.calculatorDisplay .current-display {
     color: salmon;
     font-size: 2rem;
 }
