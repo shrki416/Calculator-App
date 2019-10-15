@@ -10,6 +10,7 @@ calculator.addEventListener('click', e => {
         const displayedKey = currentDisplay.textContent
         
         if (!action) {
+            console.log('number key!');
             currentDisplay.textContent = displayedKey + calcBtnValue
         }
 
@@ -24,7 +25,6 @@ calculator.addEventListener('click', e => {
 
         if (action === "decimal") {
             console.log('decimal key!');
-            if (currentDisplay === '.') return
             currentDisplay.textContent = displayedKey + '.'
         }
 
