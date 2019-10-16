@@ -4,6 +4,9 @@ const calculatorNumberButtons = document.querySelectorAll('[data-number]')
 const currentDisplay = document.querySelector('.current-display')
 const previousDisplay = document.querySelector('.previous-display')
 
+let firstOperand = null;
+let secondOperand = null;
+
 operationButtons.forEach(button => {
   button.addEventListener('click', e => {
     const operation = button.dataset.action
@@ -38,6 +41,7 @@ calculatorNumberButtons.forEach(button => {
   button.addEventListener('click', e => {
     const numberButtons = button.textContent
     const display = currentDisplay.textContent
+    if (numberButtons === '.' && display.includes('.')) return
     currentDisplay.textContent = display + numberButtons
 
     console.log('number key was pressed')
@@ -46,7 +50,7 @@ calculatorNumberButtons.forEach(button => {
 
 const clearButton = document.querySelector('[data-all-clear]')
 clearButton.addEventListener('click', e => {
-  currentDisplay.textContent = '0'
+  currentDisplay.textContent = ''
   previousDisplay.textContent = ''
   console.log('clear button was pressed')
 })
