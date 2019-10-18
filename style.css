@@ -55,6 +55,6 @@ body {
 }
 
 .calculatorDisplay .current-display {
-    color: salmon;
+    color: rgba(250, 128, 114);
     font-size: 2rem;
 }

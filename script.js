@@ -57,9 +57,12 @@ function updateDisplay(){
   })
 }
 
-function removeLastChar(button){
+function removeLastChar(){
   const deleteButton = document.querySelector('[data-delete]')
   deleteButton.addEventListener('click', e => {
+    let displayString = currentDisplay.textContent
+    let deleteLastCharacter = displayString.slice(0, -1)
+    currentDisplay.textContent = deleteLastCharacter;
   })
 }
 
@@ -69,5 +72,4 @@ function compute(){
     console.log('equal button is pressed')
   })
 }
-
 }
