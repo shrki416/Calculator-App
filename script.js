@@ -33,9 +33,7 @@ function compute(){
       // let computation
       
       previousDisplay.textContent = currentDisplay.textContent + button.textContent;
-      
-
-
+ 
       switch (operator) {
         case "+":
           // computation = firstOperand + secondOperand;
