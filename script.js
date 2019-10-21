@@ -7,11 +7,11 @@ currentDisplay = document.querySelector("[data-current-display]");
 
 appendNumber();
 compute();
-result();
+// result();
 removeLastChar();
 updateDisplay();
 
-function appendNumber(){
+function appendNumber() {
   calculatorNumberButtons.forEach(button => {
     button.addEventListener("click", e => {
       if (
@@ -25,53 +25,53 @@ function appendNumber(){
   });
 }
 
-function compute(){
+function compute() {
   
   calculatorOperationButtons.forEach(button => {
     button.addEventListener("click", e => {
       const operator = button.dataset.action
-      // let computation
       
       previousDisplay.textContent = currentDisplay.textContent + button.textContent;
- 
+      let firstOperand = parseFloat(previousDisplay.textContent);
+      console.log(firstOperand, currentDisplay.textContent)
+
+      if (currentDisplay.textContent != null){
+        previousDisplay.textContent = firstOperand + button.textContent;
+        currentDisplay.textContent = ''
+      } 
+
       switch (operator) {
         case "+":
-          // computation = firstOperand + secondOperand;
-          
-          previousDisplay.textContent = ''
-          console.log("add");
+          // firstOperand + secondOperand
           break;
         case "-":
-          // computation = firstOperand - secondOperand;
           
-          console.log("subtract");
           break;
         case "/":
-          // computation = firstOperand / secondOperand;
           
-          console.log("divide");
           break;
         case "*":
-          // computation = firstOperand * secondOperand;
           
-          console.log("multiply");
           break;
         default:
           return;
       }
+      const equalButton = document.querySelector("[data-equals]");
+      equalButton.addEventListener("click", e => {
+        console.log("equal button is pressed");
+      });
     });
   });
 }
 
-function result() {
-  const equalButton = document.querySelector("[data-equals]");
-  equalButton.addEventListener("click", e => {
-    // compute();
-    console.log("equal button is pressed");
-  });
-}
+// function result() {
+//   const equalButton = document.querySelector("[data-equals]");
+//   equalButton.addEventListener("click", e => {
+//     console.log("equal button is pressed");
+//   });
+// }
 
-function updateDisplay(){
+function updateDisplay() {
   const clearDisplay = document.querySelector('[data-all-clear]')
   clearDisplay.addEventListener('click', e => {
     currentDisplay.textContent = '';
@@ -79,7 +79,7 @@ function updateDisplay(){
   })
 }
 
-function removeLastChar(){
+function removeLastChar() {
   const deleteButton = document.querySelector('[data-delete]')
   deleteButton.addEventListener('click', e => {
     let displayString = currentDisplay.textContent
