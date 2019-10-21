@@ -33,9 +33,10 @@ function compute() {
       
       previousDisplay.textContent = currentDisplay.textContent + button.textContent;
       let firstOperand = parseFloat(previousDisplay.textContent);
+
       console.log(firstOperand, currentDisplay.textContent)
 
-      if (currentDisplay.textContent != null){
+      if (currentDisplay.textContent != null) {
         previousDisplay.textContent = firstOperand + button.textContent;
         currentDisplay.textContent = ''
       } 
@@ -45,13 +46,13 @@ function compute() {
           // firstOperand + secondOperand
           break;
         case "-":
-          
+          // firstOperand - secondOperand
           break;
         case "/":
-          
+          // firstOperand / secondOperand
           break;
         case "*":
-          
+          // firstOperand * secondOperand
           break;
         default:
           return;
@@ -59,6 +60,7 @@ function compute() {
       const equalButton = document.querySelector("[data-equals]");
       equalButton.addEventListener("click", e => {
         console.log("equal button is pressed");
+        console.log(firstOperand, currentDisplay.textContent)
       });
     });
   });
