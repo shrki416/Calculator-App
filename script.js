@@ -1,8 +1,6 @@
 document.body.onload = function() {
   const calculatorNumberButtons = document.querySelectorAll("[data-number]");
-  const calculatorOperationButtons = document.querySelectorAll(
-    "[data-operation]"
-  );
+  const calculatorOperationButtons = document.querySelectorAll("[data-operation]");
   previousDisplay = document.querySelector("[data-previous-display]");
   currentDisplay = document.querySelector("[data-current-display]");
 
@@ -31,18 +29,16 @@ document.body.onload = function() {
         const operator = button.dataset.action;
         let result;
 
-        previousDisplay.textContent =
-          currentDisplay.textContent + button.textContent;
+        previousDisplay.textContent = currentDisplay.textContent + button.textContent;
         let firstOperand = parseFloat(previousDisplay.textContent);
 
-        console.log(firstOperand, currentDisplay.textContent);
+        let secondOperand = parseFloat(currentDisplay.textContent);
+        console.log(firstOperand, secondOperand);
 
         if (currentDisplay.textContent != null) {
           previousDisplay.textContent = firstOperand + button.textContent;
-          currentDisplay.textContent = "";
+          currentDisplay.textContent = ''
         }
-
-        let secondOperand = parseFloat(currentDisplay.textContent);
 
         switch (operator) {
           case "+":
@@ -60,6 +56,7 @@ document.body.onload = function() {
           default:
             return;
         }
+
         const equalButton = document.querySelector("[data-equals]");
         equalButton.addEventListener("click", e => {
           currentDisplay.textContent = result;
