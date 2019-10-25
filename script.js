@@ -7,7 +7,7 @@ document.body.onload = function() {
 
   const calculatorNumberButtons   = document.querySelectorAll("[data-number]");
   const calculatorOperatorButtons = document.querySelectorAll("[data-operation]");
-  const equalButton               = document.querySelector("[data-equal]");
+  const equalButton               = document.querySelector("[data-equals]");
   const allClearButton            = document.querySelector("[data-all-clear]");
   const deleteLastCharacter       = document.querySelector("[data-delete]");
   previousDisplay                 = document.querySelector("[data-previous-display]");
