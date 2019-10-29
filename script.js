@@ -1,77 +1,86 @@
 document.body.onload = function() {
-  let operator = "";
-  let firstOperand = null;
-  let secondOperand = null;
+  calculatorNumberButtons   = document.querySelectorAll("[data-number]");
+  calculatorOperatorButtons = document.querySelectorAll("[data-operation]");
+  clearDisplay              = document.querySelector("[data-all-clear]");
+  deleteLastCharacter       = document.querySelector("[data-delete]");
+  currentDisplay            = document.querySelector(".current-display");
+  previousDisplay           = document.querySelector('.previous-display');
+  equalButton               = document.querySelector("[data-equals]");
 
-  isOperatorClicked = false;
-
-  const calculatorNumberButtons   = document.querySelectorAll("[data-number]");
-  const calculatorOperatorButtons = document.querySelectorAll("[data-operation]");
-  const equalButton               = document.querySelector("[data-equals]");
-  const allClearButton            = document.querySelector("[data-all-clear]");
-  const deleteLastCharacter       = document.querySelector("[data-delete]");
-  previousDisplay                 = document.querySelector("[data-previous-display]");
-  currentDisplay                  = document.querySelector("[data-current-display]");
+  let firstOperand = "";
+  let secondOperand = "";
+  let result;
+  let operator;
 
   calculatorNumberButtons.forEach(button => {
     button.addEventListener("click", e => {
       if (
         button.textContent === "." &&
         currentDisplay.textContent.includes(".")
-      ) return;
-      currentDisplay.textContent = currentDisplay.textContent + button.textContent;
+      )
+        return;
+
+      if (result) {
+        firstOperand = button.textContent;
+        result = "";
+      } else {
+        firstOperand += button.textContent;
+      }
+      currentDisplay.textContent = firstOperand;
+      console.log("firstOperand = ", firstOperand);
     });
   });
 
   calculatorOperatorButtons.forEach(button => {
     button.addEventListener("click", e => {
+      secondOperand = firstOperand;
+      firstOperand = previousDisplay.textContent;
       operator = button.textContent;
-      console.log("operator: ", operator);
-      if (isOperatorClicked = true) {
-        firstOperand = parseFloat(currentDisplay.textContent);
-        previousDisplay.textContent = firstOperand + operator;
-        currentDisplay.textContent = "";
-        console.log("firstOperand = ", firstOperand);
-        console.log("currentDisplay: ", currentDisplay.textContent);
-      } // get secondOperand logic here
+      console.log("secondOperand = ", secondOperand);
+      console.log("operator = ", operator);
     });
   });
 
-  deleteLastCharacter.addEventListener("click", e => {
-    currentDisplay.textContent = currentDisplay.textContent.substring(0, currentDisplay.textContent.length - 1);
-  });
-
-  allClearButton.addEventListener("click", e => {
-    currentDisplay.textContent = "";
-    previousDisplay.textContent = "";
-    firstOperand = null;
-    secondOperand = null;
-    operator = "";
-  });
-
-  const calculator = function(operator, firstOperand, secondOperand) {
-    let result = 0;
+  let calculate = function() {
+    secondOperand = parseFloat(secondOperand);
+    firstOperand = parseFloat(firstOperand);
 
     switch (operator) {
       case "+":
-        result = firstOperand + secondOperand;
+        result = secondOperand + firstOperand;
         break;
       case "-":
-        result = firstOperand - secondOperand;
-        break;
-      case "*":
-        result = firstOperand * secondOperand;
+        result = secondOperand - firstOperand;
         break;
       case "/":
-        result = firstOperand / secondOperand;
+        result = secondOperand / firstOperand;
+        break;
+      case "*":
+        result = secondOperand * firstOperand;
         break;
       default:
-        return;
+        result = firstOperand;
     }
-    return result;
+
+    currentDisplay.textContent = result;
+
+    secondOperand = 0;
+    firstOperand = result;
   };
 
-  equalButton.addEventListener("click", e => {
-    console.log("equal button is pressed");
+  clearDisplay.addEventListener("click", e => {
+    currentDisplay.textContent = "";
+    firstOperand = "";
+    secondOperand = "";
+    operator = "";
   });
+
+  deleteLastCharacter.addEventListener("click", e => {
+    currentDisplay.textContent = currentDisplay.textContent.substring(
+      0,
+      currentDisplay.textContent.length - 1
+    );
+  });
+
+  equalButton.addEventListener("click", calculate);
 };
