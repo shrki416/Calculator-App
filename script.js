@@ -33,9 +33,10 @@ document.body.onload = function() {
 
   calculatorOperatorButtons.forEach(button => {
     button.addEventListener("click", e => {
-      secondOperand = firstOperand;
-      firstOperand = previousDisplay.textContent;
       operator = button.textContent;
+      secondOperand = firstOperand;
+      previousDisplay.textContent = secondOperand + operator;
+      firstOperand = '';
       console.log("secondOperand = ", secondOperand);
       console.log("operator = ", operator);
     });
@@ -70,16 +71,16 @@ document.body.onload = function() {
 
   clearDisplay.addEventListener("click", e => {
     currentDisplay.textContent = "";
+    previousDisplay.textContent = "";
     firstOperand = "";
     secondOperand = "";
     operator = "";
   });
 
   deleteLastCharacter.addEventListener("click", e => {
-    currentDisplay.textContent = currentDisplay.textContent.substring(
-      0,
-      currentDisplay.textContent.length - 1
-    );
+    let displayString = currentDisplay.textContent;
+    let deleteLastCharacter = displayString.slice(0, -1);
+    currentDisplay.textContent = deleteLastCharacter;
   });
 
   equalButton.addEventListener("click", calculate);
