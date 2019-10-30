@@ -51,7 +51,7 @@ document.body.onload = function() {
         result = secondOperand + firstOperand;
         break;
       case "-":
-        result = secondOperand - firstOperand;
+        result = firstOperand - secondOperand;
         break;
       case "/":
         result = secondOperand / firstOperand;
@@ -81,6 +81,7 @@ document.body.onload = function() {
     let displayString = currentDisplay.textContent;
     let deleteLastCharacter = displayString.slice(0, -1);
     currentDisplay.textContent = deleteLastCharacter;
+    firstOperand = deleteLastCharacter;
   });
 
   equalButton.addEventListener("click", calculate);
