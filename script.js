@@ -27,18 +27,18 @@ document.body.onload = function() {
         firstOperand += button.textContent;
       }
       currentDisplay.textContent = firstOperand;
-      console.log("firstOperand = ", firstOperand);
     });
   });
 
   calculatorOperatorButtons.forEach(button => {
     button.addEventListener("click", e => {
       operator = button.textContent;
+
+      if (currentDisplay.textContent === '') return;
+      
       secondOperand = firstOperand;
       previousDisplay.textContent = secondOperand + operator;
       firstOperand = '';
-      console.log("secondOperand = ", secondOperand);
-      console.log("operator = ", operator);
     });
   });
 
@@ -51,7 +51,7 @@ document.body.onload = function() {
         result = secondOperand + firstOperand;
         break;
       case "-":
-        result = firstOperand - secondOperand;
+        result = secondOperand - firstOperand;
         break;
       case "/":
         result = secondOperand / firstOperand;
@@ -64,8 +64,7 @@ document.body.onload = function() {
     }
 
     currentDisplay.textContent = result;
-
-    secondOperand = 0;
+    secondOperand = '';
     firstOperand = result;
   };
 
@@ -86,3 +85,11 @@ document.body.onload = function() {
 
   equalButton.addEventListener("click", calculate);
 };
+
+/* 
+weird things that happen:
+=========================
+- when the display is empty -> when equal is pressed -> NaN is displayed
+- after an operation is completed -> when equal is pressed again -> NaN is displayed
+
+*/
