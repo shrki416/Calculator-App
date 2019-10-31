@@ -11,6 +11,7 @@ document.body.onload = function() {
   let secondOperand = "";
   let result;
   let operator;
+  let operation = true;
 
   calculatorNumberButtons.forEach(button => {
     button.addEventListener("click", e => {
@@ -33,23 +34,26 @@ document.body.onload = function() {
   calculatorOperatorButtons.forEach(button => {
     button.addEventListener("click", e => {
       if (currentDisplay.textContent === "") return;
-
+      if (currentDisplay.textContent !== '' && previousDisplay.textContent !== ''){
+        // continous operation goes here
+        operator.addEventListener("click", calculate);
+      }
       operator = button.textContent;
-      
       secondOperand = firstOperand;
       previousDisplay.textContent = secondOperand + operator;
-      firstOperand = '';
+      currentDisplay.textContent = "";
+      firstOperand = "";
     });
   });
 
   let calculate = function() {
-    if (secondOperand.length > 0) {
+    if (currentDisplay.textContent === "") return;
+
+    if (secondOperand.length > 0 || firstOperand.length > 0) {
       secondOperand = parseFloat(secondOperand);
-    }
-    if (firstOperand.length > 0) {
       firstOperand = parseFloat(firstOperand);
     }
-
+ 
     switch (operator) {
       case "+":
         result = secondOperand + firstOperand;
@@ -64,12 +68,11 @@ document.body.onload = function() {
         result = secondOperand * firstOperand;
         break;
       default:
-        result = firstOperand;
+        return;
     }
-
-    currentDisplay.textContent = result;
-    secondOperand = '';
     firstOperand = result;
+    secondOperand = '';
+    currentDisplay.textContent = result;
   };
 
   clearDisplay.addEventListener("click", e => {
