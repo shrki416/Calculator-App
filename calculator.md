@@ -7,8 +7,8 @@ Calculator:
 <!-- * Multiply two numbers -->
 <!-- * Divide two numbers -->
 <!-- * Display at least 10 digits on the screen -->
-* Display decimals to at least the thousandth (.001)
-* Perform continuous function:
+<!-- * Display decimals to at least the thousandth (.001) -->
+* Perform continuous function
 
 Example:
 * Press the 1 button

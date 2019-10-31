@@ -32,9 +32,9 @@ document.body.onload = function() {
 
   calculatorOperatorButtons.forEach(button => {
     button.addEventListener("click", e => {
-      operator = button.textContent;
+      if (currentDisplay.textContent === "") return;
 
-      if (currentDisplay.textContent === '') return;
+      operator = button.textContent;
       
       secondOperand = firstOperand;
       previousDisplay.textContent = secondOperand + operator;
@@ -43,8 +43,12 @@ document.body.onload = function() {
   });
 
   let calculate = function() {
-    secondOperand = parseFloat(secondOperand);
-    firstOperand = parseFloat(firstOperand);
+    if (secondOperand.length > 0) {
+      secondOperand = parseFloat(secondOperand);
+    }
+    if (firstOperand.length > 0) {
+      firstOperand = parseFloat(firstOperand);
+    }
 
     switch (operator) {
       case "+":
@@ -85,11 +89,3 @@ document.body.onload = function() {
 
   equalButton.addEventListener("click", calculate);
 };
-
-/* 
-weird things that happen:
-=========================
-- when the display is empty -> when equal is pressed -> NaN is displayed
-- after an operation is completed -> when equal is pressed again -> NaN is displayed
-
-*/
