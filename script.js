@@ -11,8 +11,7 @@ document.body.onload = function() {
   let secondOperand = "";
   let result;
   let operator;
-  let operation = true;
-
+  
   calculatorNumberButtons.forEach(button => {
     button.addEventListener("click", e => {
       if (
@@ -34,9 +33,11 @@ document.body.onload = function() {
   calculatorOperatorButtons.forEach(button => {
     button.addEventListener("click", e => {
       if (currentDisplay.textContent === "") return;
-      if (currentDisplay.textContent !== '' && previousDisplay.textContent !== ''){
-        // continous operation goes here
-        operator.addEventListener("click", calculate);
+        
+      if (firstOperand !== '' && secondOperand !== ''){
+        if (operator === operator) {
+          calculate()
+        }
       }
       operator = button.textContent;
       secondOperand = firstOperand;
