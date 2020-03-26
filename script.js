@@ -1,19 +1,19 @@
 document.body.onload = function() {
-  calculatorNumberButtons   = document.querySelectorAll("[data-number]");
+  calculatorNumberButtons = document.querySelectorAll("[data-number]");
   calculatorOperatorButtons = document.querySelectorAll("[data-operation]");
-  clearDisplay              = document.querySelector("[data-all-clear]");
-  deleteLastCharacter       = document.querySelector("[data-delete]");
-  currentDisplay            = document.querySelector(".current-display");
-  previousDisplay           = document.querySelector('.previous-display');
-  equalButton               = document.querySelector("[data-equals]");
+  clearDisplay = document.querySelector("[data-all-clear]");
+  deleteLastCharacter = document.querySelector("[data-delete]");
+  currentDisplay = document.querySelector(".current-display");
+  previousDisplay = document.querySelector(".previous-display");
+  equalButton = document.querySelector("[data-equals]");
 
   let firstOperand = "";
   let secondOperand = "";
   let result;
   let operator;
-  
+
   calculatorNumberButtons.forEach(button => {
-    button.addEventListener("click", e => {
+    button.addEventListener("click", () => {
       if (
         button.textContent === "." &&
         currentDisplay.textContent.includes(".")
@@ -31,12 +31,12 @@ document.body.onload = function() {
   });
 
   calculatorOperatorButtons.forEach(button => {
-    button.addEventListener("click", e => {
+    button.addEventListener("click", () => {
       if (currentDisplay.textContent === "") return;
-        
-      if (firstOperand !== '' && secondOperand !== ''){
+
+      if (firstOperand !== "" && secondOperand !== "") {
         if (operator === operator) {
-          calculate()
+          calculate();
         }
       }
       operator = button.textContent;
@@ -54,7 +54,7 @@ document.body.onload = function() {
       secondOperand = parseFloat(secondOperand);
       firstOperand = parseFloat(firstOperand);
     }
- 
+
     switch (operator) {
       case "+":
         result = secondOperand + firstOperand;
@@ -72,11 +72,11 @@ document.body.onload = function() {
         return;
     }
     firstOperand = result;
-    secondOperand = '';
+    secondOperand = "";
     currentDisplay.textContent = result;
   };
 
-  clearDisplay.addEventListener("click", e => {
+  clearDisplay.addEventListener("click", () => {
     currentDisplay.textContent = "";
     previousDisplay.textContent = "";
     firstOperand = "";
@@ -84,7 +84,7 @@ document.body.onload = function() {
     operator = "";
   });
 
-  deleteLastCharacter.addEventListener("click", e => {
+  deleteLastCharacter.addEventListener("click", () => {
     let displayString = currentDisplay.textContent;
     let deleteLastCharacter = displayString.slice(0, -1);
     currentDisplay.textContent = deleteLastCharacter;
