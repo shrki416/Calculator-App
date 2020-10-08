@@ -18,4 +18,4 @@ It took me about a month to complete and work through all functionality needed. 
 
 ### Author
 
-- Ahmed Abdelaal - [Website]() | [LinkedIn]()
+- Ahmed Abdelaal - [Website](https://aa-dev.io/) | [LinkedIn](www.linkedin.com/in/aa-dev)
