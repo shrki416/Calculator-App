@@ -1,4 +1,4 @@
-document.body.onload = function() {
+document.body.onload = function () {
   calculatorNumberButtons = document.querySelectorAll("[data-number]");
   calculatorOperatorButtons = document.querySelectorAll("[data-operation]");
   clearDisplay = document.querySelector("[data-all-clear]");
@@ -12,7 +12,7 @@ document.body.onload = function() {
   let result;
   let operator;
 
-  calculatorNumberButtons.forEach(button => {
+  calculatorNumberButtons.forEach((button) => {
     button.addEventListener("click", () => {
       if (
         button.textContent === "." &&
@@ -30,14 +30,12 @@ document.body.onload = function() {
     });
   });
 
-  calculatorOperatorButtons.forEach(button => {
+  calculatorOperatorButtons.forEach((button) => {
     button.addEventListener("click", () => {
       if (currentDisplay.textContent === "") return;
 
-      if (firstOperand !== "" && secondOperand !== "") {
-        if (operator === operator) {
-          calculate();
-        }
+      if (firstOperand && secondOperand) {
+        calculate();
       }
       operator = button.textContent;
       secondOperand = firstOperand;
@@ -47,7 +45,24 @@ document.body.onload = function() {
     });
   });
 
-  let calculate = function() {
+  clearDisplay.addEventListener("click", () => {
+    currentDisplay.textContent = "";
+    previousDisplay.textContent = "";
+    firstOperand = "";
+    secondOperand = "";
+    operator = "";
+  });
+
+  deleteLastCharacter.addEventListener("click", () => {
+    let displayString = currentDisplay.textContent;
+    let deleteLastCharacter = displayString.slice(0, -1);
+    currentDisplay.textContent = deleteLastCharacter;
+    firstOperand = deleteLastCharacter;
+  });
+
+  equalButton.addEventListener("click", calculate);
+
+  function calculate() {
     if (currentDisplay.textContent === "") return;
 
     if (secondOperand.length > 0 || firstOperand.length > 0) {
@@ -74,22 +89,5 @@ document.body.onload = function() {
     firstOperand = result;
     secondOperand = "";
     currentDisplay.textContent = result;
-  };
-
-  clearDisplay.addEventListener("click", () => {
-    currentDisplay.textContent = "";
-    previousDisplay.textContent = "";
-    firstOperand = "";
-    secondOperand = "";
-    operator = "";
-  });
-
-  deleteLastCharacter.addEventListener("click", () => {
-    let displayString = currentDisplay.textContent;
-    let deleteLastCharacter = displayString.slice(0, -1);
-    currentDisplay.textContent = deleteLastCharacter;
-    firstOperand = deleteLastCharacter;
-  });
-
-  equalButton.addEventListener("click", calculate);
+  }
 };
