@@ -77,7 +77,7 @@ document.body.onload = function () {
       case "-":
         result = secondOperand - firstOperand;
         break;
-      case "/":
+      case "÷":
         result = secondOperand / firstOperand;
         break;
       case "*":
