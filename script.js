@@ -34,9 +34,8 @@ document.body.onload = function () {
     button.addEventListener("click", () => {
       if (currentDisplay.textContent === "") return;
 
-      if (firstOperand && secondOperand) {
-        calculate();
-      }
+      if (firstOperand && secondOperand) calculate();
+
       operator = button.textContent;
       secondOperand = firstOperand;
       previousDisplay.textContent = secondOperand + operator;
