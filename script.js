@@ -1,92 +1,90 @@
-document.body.onload = function () {
-  calculatorNumberButtons = document.querySelectorAll("[data-number]");
-  calculatorOperatorButtons = document.querySelectorAll("[data-operation]");
-  clearDisplay = document.querySelector("[data-all-clear]");
-  deleteLastCharacter = document.querySelector("[data-delete]");
-  currentDisplay = document.querySelector(".current-display");
-  previousDisplay = document.querySelector(".previous-display");
-  equalButton = document.querySelector("[data-equals]");
+const currentDisplay = document.querySelector(".current-display");
+const previousDisplay = document.querySelector(".previous-display");
 
-  let firstOperand = "";
-  let secondOperand = "";
-  let result;
-  let operator;
+let firstOperand = "";
+let secondOperand = "";
+let result;
+let operator;
 
-  calculatorNumberButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      if (
-        button.textContent === "." &&
-        currentDisplay.textContent.includes(".")
-      )
-        return;
+const calculatorNumberButtons = document.querySelectorAll("[data-number]");
+calculatorNumberButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (button.textContent === "." && currentDisplay.textContent.includes("."))
+      return;
 
-      if (result) {
-        firstOperand = button.textContent;
-        result = "";
-      } else {
-        firstOperand += button.textContent;
-      }
-      currentDisplay.textContent = firstOperand;
-    });
+    if (result) {
+      firstOperand = button.textContent;
+      result = "";
+    } else {
+      firstOperand += button.textContent;
+    }
+    currentDisplay.textContent = firstOperand;
   });
+});
 
-  calculatorOperatorButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      if (currentDisplay.textContent === "") return;
-
-      if (firstOperand && secondOperand) calculate();
-
-      operator = button.textContent;
-      secondOperand = firstOperand;
-      previousDisplay.textContent = secondOperand + operator;
-      currentDisplay.textContent = "";
-      firstOperand = "";
-    });
-  });
-
-  clearDisplay.addEventListener("click", () => {
-    currentDisplay.textContent = "";
-    previousDisplay.textContent = "";
-    firstOperand = "";
-    secondOperand = "";
-    operator = "";
-  });
-
-  deleteLastCharacter.addEventListener("click", () => {
-    let displayString = currentDisplay.textContent;
-    let deleteLastCharacter = displayString.slice(0, -1);
-    currentDisplay.textContent = deleteLastCharacter;
-    firstOperand = deleteLastCharacter;
-  });
-
-  equalButton.addEventListener("click", calculate);
-
-  function calculate() {
+const calculatorOperatorButtons = document.querySelectorAll("[data-operation]");
+calculatorOperatorButtons.forEach((button) => {
+  button.addEventListener("click", () => {
     if (currentDisplay.textContent === "") return;
 
-    if (secondOperand.length > 0 || firstOperand.length > 0) {
-      secondOperand = parseFloat(secondOperand);
-      firstOperand = parseFloat(firstOperand);
-    }
+    if (firstOperand && secondOperand) calculate();
 
-    switch (operator) {
-      case "+":
-        result = secondOperand + firstOperand;
-        break;
-      case "-":
-        result = secondOperand - firstOperand;
-        break;
-      case "÷":
-        result = secondOperand / firstOperand;
-        break;
-      case "*":
-        result = secondOperand * firstOperand;
-        break;
-      default:
-        return;
-    }
-    firstOperand = result;
-    secondOperand = "";
-    currentDisplay.textContent = result;
+    operator = button.textContent;
+    secondOperand = firstOperand;
+    previousDisplay.textContent = secondOperand + operator;
+    currentDisplay.textContent = "";
+    firstOperand = "";
+  });
+});
+
+const clearDisplay = document.querySelector("[data-all-clear]");
+clearDisplay.addEventListener("click", clear);
+function clear() {
+  currentDisplay.textContent = "";
+  previousDisplay.textContent = "";
+  firstOperand = "";
+  secondOperand = "";
+  operator = "";
+}
+
+const deleteLastCharacter = document.querySelector("[data-delete]");
+deleteLastCharacter.addEventListener("click", removeCharacter);
+
+function removeCharacter() {
+  let displayString = currentDisplay.textContent;
+  let deleteLastCharacter = displayString.slice(0, -1);
+  currentDisplay.textContent = deleteLastCharacter;
+  firstOperand = deleteLastCharacter;
+}
+
+const equalButton = document.querySelector("[data-equals]");
+equalButton.addEventListener("click", calculate);
+
+function calculate() {
+  if (currentDisplay.textContent === "") return;
+
+  if (secondOperand.length > 0 || firstOperand.length > 0) {
+    secondOperand = parseFloat(secondOperand);
+    firstOperand = parseFloat(firstOperand);
   }
-};
+
+  switch (operator) {
+    case "+":
+      result = secondOperand + firstOperand;
+      break;
+    case "-":
+      result = secondOperand - firstOperand;
+      break;
+    case "÷":
+      result = secondOperand / firstOperand;
+      break;
+    case "*":
+      result = secondOperand * firstOperand;
+      break;
+    default:
+      return;
+  }
+  firstOperand = result;
+  secondOperand = "";
+  currentDisplay.textContent = result;
+}
